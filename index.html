@@ -11,14 +11,29 @@
     <canvas id="myCanvas"></canvas>
     <div id = "controls">
         <button onClick="addRandomPoint()">Add Point</button>
+        <button onClick="addRandomSegment()">Add Segment</button>
     </div>
 
     <script src="js/math/graph.js"></script>   
     <script src="js/primitives/segment.js"></script>   
     <script src="js/primitives/point.js"></script>    
     <script>
+        
+         function addRandomSegment(){
+            //point 1
+            const index1 = Math.floor(Math.random() * graph.points.length);
+            //point 2
+            const index2 = Math.floor(Math.random() * graph.points.length);
+            //add the segment
+            const check = graph.tryAddSegment(
+                new Segment( graph.points[index1], graph.points[index2])
+            );
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+            graph.draw(ctx);
+            console.log("segment check", check);
+        }
         function addRandomPoint(){
-            graph.addPoint(
+            const check = graph.tryAddPoint(
                 new Point(
                     Math.random() * myCanvas.width,
                     Math.random() * myCanvas.height
@@ -26,6 +41,7 @@
             );
             ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
             graph.draw(ctx);
+            console.log(check);
         }
 
         myCanvas.width = 600;
