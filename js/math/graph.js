@@ -31,11 +31,19 @@ class Graph{
     }
 
     tryAddSegment(segment){
-        if(!this.containsSegment(segment)){
+        if(!this.containsSegment(segment) && !segment.p1.equals(segment.p2)){
             this.addSegment(segment);
             return true;
         }
         return false;
+    }
+
+    removeSegment(segment){
+        this.segments.splice(this.segments.indexOf(segment), 1); // index, # of elemnts being removed
+    }
+
+    removePoint(point){
+        this.points.splice(this.points.indexOf(point), 1);
     }
     draw(ctx){
         for(const seg of this.segments){
